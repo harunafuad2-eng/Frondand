@@ -6,6 +6,19 @@
     <title>Progres & Riwayat Pesanan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="assets/logogpid.png" type="image/png">
+    <script>
+        // --- PROTEKSI HALAMAN (SESSION CHECK) ---
+        const loggedInUserEmail = localStorage.getItem('loggedInUserEmail');
+        if (loggedInUserEmail) {
+            const customers = JSON.parse(localStorage.getItem('gerbangPanganCustomers')) || [];
+            const currentUser = customers.find(c => c.email === loggedInUserEmail);
+            if (!currentUser) {
+                window.location.replace('apk_login.html'); // Data pengguna tidak ditemukan, redirect
+            }
+        } else {
+            window.location.replace('apk_login.html'); // Tidak ada sesi login, redirect
+        }
+    </script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
